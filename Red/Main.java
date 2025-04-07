@@ -56,7 +56,7 @@ public class Main {
         entradas.add(img_data);
         salidas.add(img_data);
 
-        RedNeuronal nn = new RedNeuronal(new int[]{ width * height, 100, 50, 20, 1 });
+        RedNeuronal nn = new RedNeuronal(new int[]{ width * height, 100, 20, 1 });
         double[] prediccionInicial = nn.Activacion(img_data); // Primer prediccion
 
         System.out.printf("--Resultado inicial de la Red Neuronal %.8f\n", prediccionInicial[0]);
@@ -67,7 +67,8 @@ public class Main {
         X.add(img_data);
         Y.add(img_data);
         System.out.println("----- Comenzando Entrenamiento... ----- \n");
-        nn.EntrenarYEncontrarEpoch(entradas, salidas, 0.1, 0.000001);
+
+        nn.EntrenarYEncontrarEpoch(entradas, salidas, 0.5, 0.001);
 
         // int epoch = 10;
         // for (int e = 0; e < epoch; e++)
@@ -80,7 +81,7 @@ public class Main {
         System.out.println("----- Haciendo una prueba con la imagen ----- \n");
         double err = nn.ErrorTotal(X, Y);
         double[] res = nn.Activacion(img_data); // Haciendo una ultima prediccion
-        System.out.printf("resultado de la Red Neuronal %.8f\n", res[0]);
+        System.out.printf("resultado de la Red Neuronal, Activacion %.16f, Error %.16f\n", res[0], err);
 
         // segun https://en.wikipedia.org/wiki/Sigmoid_function
         if(res[0] > 0.0) {
