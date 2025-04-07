@@ -1,2 +1,2 @@
 # ProyectoIA
-Proyecto Inteligencia Artifical
+Proyecto Para la clase de Inteligencia Artifical
