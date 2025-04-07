@@ -56,7 +56,7 @@ public class Main {
         entradas.add(img_data);
         salidas.add(img_data);
 
-        RedNeuronal nn = new RedNeuronal(new int[]{ width * height, 100, 20, 1 });
+        RedNeuronal nn = new RedNeuronal(new int[]{ width * height, 20, 1 });
         double[] prediccionInicial = nn.Activacion(img_data); // Primer prediccion
 
         System.out.printf("--Resultado inicial de la Red Neuronal %.8f\n", prediccionInicial[0]);
@@ -68,14 +68,14 @@ public class Main {
         Y.add(img_data);
         System.out.println("----- Comenzando Entrenamiento... ----- \n");
 
-        nn.EntrenarYEncontrarEpoch(entradas, salidas, 0.5, 0.001);
+        // nn.EntrenarYEncontrarEpoch(entradas, salidas, 0.5, 0.01);
 
-        // int epoch = 10;
-        // for (int e = 0; e < epoch; e++)
-        // {
-        //     double error = nn.Entrenar(entradas, salidas, 0.5);
-        //     System.out.printf("ephoc = %s, error calculado = %.16f, error inverso = %.16f\n", e, error, 1.0 - error);
-        // }
+        int epoch = 10;
+        for (int e = 0; e < epoch; e++)
+        {
+            double error = nn.Entrenar(entradas, salidas, 0.5);
+            System.out.printf("ephoc = %s, error calculado = %.16f, error inverso = %.16f\n", e, error, 1.0 - error);
+        }
         System.out.println("----- Entrenamiento terminado ----- \n");
 
         System.out.println("----- Haciendo una prueba con la imagen ----- \n");
