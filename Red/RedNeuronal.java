@@ -103,7 +103,7 @@ public class RedNeuronal {
                     for(int k = 0; k < capas.get(i + 1).neuronas.size(); k++){
                         sum += capas.get(i + 1).neuronas.get(k).pesos[j] * sigmas.get(i + 1)[k];
                     }
-                    sigmas.get(i)[j] = SigmoidDerivada(capas.get(i).neuronas.get(j).sumaPonderada) * sum;
+                    sigmas.get(i)[j] = SigmoidDerivada(capas.get(i).neuronas.get(j).sumaActual) * sum;
                 }
             }
         }
@@ -148,7 +148,7 @@ public class RedNeuronal {
         }
     }
 
-    public void BackPropagation(ArrayList<double[]> entradas, ArrayList<double[]> salidaEsperada, double alfa)
+    public void RetroPropagar(ArrayList<double[]> entradas, ArrayList<double[]> salidaEsperada, double alfa)
     {
         iniciarDeltas();
         for(int i = 0; i < entradas.size(); i++)
@@ -170,7 +170,7 @@ public class RedNeuronal {
         while(error > maxError)
         {
             System.out.printf("ephoc = %s, error = %.8f\n", epoch, error);
-            BackPropagation(entradasPruebas, salidasPruebas, alfa);
+            RetroPropagar(entradasPruebas, salidasPruebas, alfa);
             error = ErrorTotal(entradasPruebas, salidasPruebas);
             epoch++ ;
         }
@@ -179,7 +179,7 @@ public class RedNeuronal {
     public double Entrenar(ArrayList<double[]> entradasPruebas, ArrayList<double[]> salidasPruebas, double alfa)
     {
         double err = 99999999;
-        BackPropagation(entradasPruebas, salidasPruebas, alfa);
+        RetroPropagar(entradasPruebas, salidasPruebas, alfa);
         err = ErrorTotal(entradasPruebas, salidasPruebas);
         return err;
     }
