@@ -10,19 +10,20 @@ public class Capa {
 
     Capa(int numEntradas, int numNeuronas, Random r)
     {
-        neuronas = new ArrayList<Neurona>();
+        neuronas = new ArrayList<Neurona>(numNeuronas);
 
-        for(int i = 0; i < numNeuronas; i++){
+        for(int i = 0; i < numNeuronas; i++) {
             neuronas.add(new Neurona(numEntradas, r));
         }
+
+        salidas = new double[neuronas.size()];
     }
 
     public double[] Activacion(double[] entradas)
     {
-        salidas = new double[neuronas.size()];
-
-        for(int i = 0; i < neuronas.size(); i++){
+        for(int i = 0; i < neuronas.size(); i++) {
             salidas[i] = neuronas.get(i).Activacion(entradas);
+            // System.out.printf("\t[Capa]: Neurona[%s] activacion %.16f\n", i, salidas[i]);
         }
         return salidas;
     }
