@@ -11,13 +11,11 @@ public class Neurona {
 
     Neurona(int numEntradas, Random r)
     {
-        // sesgo = r.nextDouble();
-        sesgo = -0.5;
+        sesgo = r.nextDouble() - 0.5;
         pesos = new double[numEntradas];
 
         for(int i = 0; i < pesos.length; i++) {
-            // pesos[i] = r.nextDouble();
-            pesos[i] = -0.5;
+            pesos[i] = r.nextDouble() - 0.5;
         }
     }
 
@@ -29,11 +27,16 @@ public class Neurona {
             sumaActual += entradas[i] * pesos[i];
         }
 
+        // return ReLu(sumaActual);
         return Sigmoid(sumaActual); // Funcion de activacion, usando Sigmoid
     }
 
-    public double Sigmoid(double x) {
+    public static double Sigmoid(double x) {
         return 1 / (1 + Math.exp(-x));
+    }
+
+    public static double ReLu(double x) {
+        return Math.max(x, 0);
     }
 }
 
